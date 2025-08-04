@@ -1,22 +1,31 @@
 # models.py
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from sqlalchemy import create_engine, Column, Integer, String, Text, Float, Date, Time, Boolean
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from datetime import date, time
 
-db = SQLAlchemy()
+# Database setup
+DATABASE_URL = "sqlite:///events.db"
+engine = create_engine(DATABASE_URL, echo=False)  # Set echo=True for debugging
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
-class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(1500))
-    start_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
-    start_time = db.Column(db.Time)
-    end_time = db.Column(db.Time)
-    venue = db.Column(db.String(150))
-    location = db.Column(db.String(200))
-    booking_url = db.Column(db.String(500))
-    ticket_price = db.Column(db.Float)
-    category = db.Column(db.String(100))
-    description = db.Column(db.Text, nullable=True)
+# Event Model
+class Event(Base):
+    __tablename__ = "events"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(1500))
+    start_date = Column(Date)
+    end_date = Column(Date)
+    start_time = Column(Time)
+    end_time = Column(Time)
+    venue = Column(String(150))
+    location = Column(String(200))
+    booking_url = Column(String(500))
+    ticket_price = Column(Float)
+    category = Column(String(100))
+    description = Column(Text)
 
     def __repr__(self):
-        return f"<Event {self.name}>"
+        return f"<Event(name={self.name}, id={self.id})>"
