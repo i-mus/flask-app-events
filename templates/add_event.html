@@ -1,0 +1,45 @@
+<!-- templates/add_event.html -->
+{% extends "base.html" %}
+
+{% block title %}Add New Event{% endblock %}
+
+{% block content %}
+<h2>Add New Event</h2>
+<form method="POST" class="event-form">
+    <label>Event Name *</label>
+    <input type="text" name="name" required>
+
+    <label>Start Date *</label>
+    <input type="date" name="start_date" required>
+
+    <label>End Date *</label>
+    <input type="date" name="end_date" required>
+
+    <label>Start Time *</label>
+    <input type="time" name="start_time" required>
+
+    <label>End Time *</label>
+    <input type="time" name="end_time" required>
+
+    <label>Venue *</label>
+    <input type="text" name="venue" required>
+
+    <label>Location *</label>
+    <input type="text" name="location" required>
+
+    <label>Booking URL</label>
+    <input type="url" name="booking_url" placeholder="https://example.com">
+
+    <label>Ticket Price *</label>
+    <input type="number" name="ticket_price" step="0.01" min="0" required>
+
+    <label>Category *</label>
+    <input type="text" name="category" placeholder="Concert, Conference, etc." required>
+
+    <label>Description</label>
+    <textarea name="description" rows="4" placeholder="Event details..."></textarea>
+
+    <button type="submit" class="btn btn-success">Add Event</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

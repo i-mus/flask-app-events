@@ -1,0 +1,45 @@
+<!-- templates/edit_event.html -->
+{% extends "base.html" %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+<h2>Edit Event: {{ event.name }}</h2>
+<form method="POST" class="event-form">
+    <label>Event Name *</label>
+    <input type="text" name="name" value="{{ event.name }}" required>
+
+    <label>Start Date *</label>
+    <input type="date" name="start_date" value="{{ event.start_date }}" required>
+
+    <label>End Date *</label>
+    <input type="date" name="end_date" value="{{ event.end_date }}" required>
+
+    <label>Start Time *</label>
+    <input type="time" name="start_time" value="{{ event.start_time.strftime('%H:%M') }}" required>
+
+    <label>End Time *</label>
+    <input type="time" name="end_time" value="{{ event.end_time.strftime('%H:%M') }}" required>
+
+    <label>Venue *</label>
+    <input type="text" name="venue" value="{{ event.venue }}" required>
+
+    <label>Location *</label>
+    <input type="text" name="location" value="{{ event.location }}" required>
+
+    <label>Booking URL</label>
+    <input type="url" name="booking_url" value="{{ event.booking_url or '' }}" placeholder="https://example.com">
+
+    <label>Ticket Price *</label>
+    <input type="number" name="ticket_price" step="0.01" min="0" value="{{ event.ticket_price }}" required>
+
+    <label>Category *</label>
+    <input type="text" name="category" value="{{ event.category }}" required>
+
+    <label>Description</label>
+    <textarea name="description" rows="4">{{ event.description }}</textarea>
+
+    <button type="submit" class="btn btn-success">Update Event</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
